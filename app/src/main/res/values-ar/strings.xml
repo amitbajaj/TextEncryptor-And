@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TextEncryptor</string>
+    <string name="label_for_decrypt_button">فك تشفير</string>
+    <string name="label_for_encrypt_button">تشفير</string>
+    <string name="label_for_password">كلمة السر للتشفير</string>
+    <string name="label_for_data">المصدر / البيانات المشفرة</string>
+    <string name="encryption_error">وجه الفتاة! حدث خطأ ما في التشفير</string>
+    <string name="decryption_error">وجه الفتاة! حدث خطأ ما مع فك التشفير</string>
+    <string name="error_label">خطأ!</string>
+    <string name="ok_button">حسنا!</string>
+</resources>

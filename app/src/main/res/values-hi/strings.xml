@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TextEncryptor</string>
+    <string name="label_for_data">स्रोत / एन्क्रिप्टेड डेटा</string>
+    <string name="label_for_decrypt_button">डिक्रिप्ट</string>
+    <string name="label_for_encrypt_button">एन्क्रिप्ट</string>
+    <string name="label_for_password">एन्क्रिप्शन के लिए पासवर्ड</string>
+    <string name="decryption_error">ऊप्स! डिक्रिप्शन में कुछ गलत हो गया</string>
+    <string name="encryption_error">ऊप्स! एन्क्रिप्शन के साथ कुछ गलत हो गया</string>
+    <string name="error_label">त्रुटि!</string>
+    <string name="ok_button">ठीक!</string>
+</resources>

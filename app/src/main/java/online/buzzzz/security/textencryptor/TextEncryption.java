@@ -16,6 +16,10 @@ import online.buzzzz.security.AESCrypto;
 
 public class TextEncryption extends AppCompatActivity {
 
+    private String encrypt_err_msg;
+    private String decrypt_err_msg;
+    private String error_title;
+    private String ok_button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +30,11 @@ public class TextEncryption extends AppCompatActivity {
         params.width = ViewGroup.LayoutParams.MATCH_PARENT;
         params.height = ViewGroup.LayoutParams.MATCH_PARENT;
         layout.setLayoutParams(params);
+
+        encrypt_err_msg = getString(R.string.encryption_error);
+        decrypt_err_msg = getString(R.string.decryption_error);
+        error_title = getString(R.string.error_label);
+        ok_button = getString(R.string.ok_button);
     }
 
 
@@ -47,19 +56,19 @@ public class TextEncryption extends AppCompatActivity {
         String errMessage="";
         try{
             if(iMode==1){
-                errMessage = Resources.getSystem().getString(R.string.encryption_error);
+                errMessage = encrypt_err_msg;
                 res = AESCrypto.encrypt(key,data);
             }else{
-                errMessage = Resources.getSystem().getString(R.string.decryption_error);
+                errMessage = decrypt_err_msg;
                 res = AESCrypto.decrypt(key,data);
             }
             sourceData.setText(res);
         }catch (Exception ex){
             new AlertDialog.Builder(TextEncryption.this)
-                .setTitle(Resources.getSystem().getString(R.string.error_label))
+                .setTitle(error_title)
                 .setMessage(errMessage)
                 .setCancelable(true)
-                .setNeutralButton(Resources.getSystem().getString(R.string.ok_button), new DialogInterface.OnClickListener() {
+                .setNeutralButton(ok_button, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }

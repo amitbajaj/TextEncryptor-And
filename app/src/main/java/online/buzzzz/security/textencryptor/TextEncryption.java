@@ -1,6 +1,9 @@
 package online.buzzzz.security.textencryptor;
 
 import android.app.AlertDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.support.constraint.ConstraintLayout;
@@ -45,6 +48,26 @@ public class TextEncryption extends AppCompatActivity {
 
     public void doDecrypt(View v){
         doWork(2);
+    }
+
+    public void doCopy(View v) { doCopyPaste(1); }
+
+    public void doPaste(View v){ doCopyPaste(2); }
+
+    public void doCopyPaste(int iMode){
+        EditText sourceData = (EditText)findViewById(R.id.txtData);
+        ClipboardManager clipboard = (ClipboardManager)
+                getSystemService(Context.CLIPBOARD_SERVICE);
+
+        sourceData.selectAll();
+        if (iMode == 1){
+            ClipData clip = ClipData.newPlainText("Data",sourceData.getText());
+            clipboard.setPrimaryClip(clip);
+        }else{
+            ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
+            sourceData.setText(item.getText());
+        }
+
     }
 
     private void doWork(int iMode){

@@ -9,4 +9,6 @@
     <string name="decryption_error">وجه الفتاة! حدث خطأ ما مع فك التشفير</string>
     <string name="error_label">خطأ!</string>
     <string name="ok_button">حسنا!</string>
+    <string name="label_for_copy_button">نسخ</string>
+    <string name="label_for_paste_button">معجون</string>
 </resources>

@@ -99,6 +99,4 @@ public class TextEncryption extends AppCompatActivity {
                 .show();
     }
     }
-
-
 }

@@ -11,4 +11,5 @@
     <string name="ok_button">ठीक!</string>
     <string name="label_for_copy_button">प्रतिलिपि</string>
     <string name="label_for_paste_button">पेस्ट</string>
+    <string name="label_for_save_pass_switch">पासवर्ड याद रखें</string>
 </resources>

@@ -5,15 +5,19 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.view.ViewGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import online.buzzzz.security.AESCrypto;
 
@@ -23,6 +27,8 @@ public class TextEncryption extends AppCompatActivity {
     private String decrypt_err_msg;
     private String error_title;
     private String ok_button;
+    private final String PREFS_NAME = "TextEncryptor";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +40,57 @@ public class TextEncryption extends AppCompatActivity {
         params.height = ViewGroup.LayoutParams.MATCH_PARENT;
         layout.setLayoutParams(params);
 
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        boolean savePass = settings.getBoolean("savePass", false);
+
+        Switch sw = (Switch)findViewById(R.id.savePass);
+        sw.setChecked(savePass);
+
+        EditText txtPass = (EditText)findViewById(R.id.txtPass);
+        if (savePass){
+            txtPass.setText(settings.getString("pass",""));
+        }
+        txtPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("pass",s.toString());
+
+                editor.apply();
+            }
+        });
+
+
         encrypt_err_msg = getString(R.string.encryption_error);
         decrypt_err_msg = getString(R.string.decryption_error);
         error_title = getString(R.string.error_label);
         ok_button = getString(R.string.ok_button);
     }
 
-
+    public void setPassSave(View v){
+        Switch sw = (Switch)findViewById(R.id.savePass);
+        EditText txtPass = (EditText)findViewById(R.id.txtPass);
+        SharedPreferences settings = getSharedPreferences(PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("savePass", sw.isChecked());
+        if(sw.isChecked()){
+            editor.putString("pass",txtPass.getText().toString());
+        }else{
+            editor.remove("pass");
+        }
+        editor.apply();
+    }
 
     public void doEncrypt(View v){
         doWork(1);
@@ -97,6 +147,6 @@ public class TextEncryption extends AppCompatActivity {
                     }
                 })
                 .show();
-    }
+        }
     }
 }

@@ -20,22 +20,28 @@ public class AESCrypto {
     private static final String ALGORITHM = "AES/CBC/PKCS5PADDING";
     private static final char[] DIGITS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-    public static class AESCryptoException extends RuntimeException{
+    private static class AESCryptoException extends RuntimeException{
         public AESCryptoException(){
             super();
         }
 
-        public AESCryptoException(String message){
+        private AESCryptoException(String message){
             super(message);
         }
     }
 
-    private static final String toHex(byte[] data) {
-        final StringBuffer sb = new StringBuffer(data.length * 2);
+    private static String toHex(byte[] data) {
+        final StringBuilder sb = new StringBuilder(data.length * 2);
+        for(byte singleByte : data){
+            sb.append(DIGITS[(singleByte >>> 4) & 0x0F]);
+            sb.append(DIGITS[singleByte & 0x0F]);
+        }
+        /*
         for (int i = 0; i < data.length; i++) {
             sb.append(DIGITS[(data[i] >>> 4) & 0x0F]);
             sb.append(DIGITS[data[i] & 0x0F]);
         }
+        */
         return sb.toString();
     }
 
@@ -49,7 +55,6 @@ public class AESCrypto {
 
             String key2use=toHex(md.digest(key.getBytes("UTF-8"))).substring(0, KEYLENGTH).toLowerCase();
             SecretKeySpec skeySpec;
-            System.out.println(key2use.getBytes().length);
             skeySpec = new SecretKeySpec(key2use.getBytes("UTF-8") , "AES");
 
             Cipher cipher = Cipher.getInstance(ALGORITHM);
@@ -78,7 +83,6 @@ public class AESCrypto {
             byte[] encrypted = new byte[staged.length-IVLENGTH];
             MessageDigest md = MessageDigest.getInstance("SHA-256"); 
             String key2use=toHex(md.digest(key.getBytes("UTF-8"))).substring(0,KEYLENGTH).toLowerCase();
-            System.out.println(key2use.getBytes().length);
             System.arraycopy(staged, 0, ivBytes, 0, ivBytes.length);
             System.arraycopy(staged, ivBytes.length, encrypted, 0, staged.length-ivBytes.length);
             IvParameterSpec iv = new IvParameterSpec(ivBytes);

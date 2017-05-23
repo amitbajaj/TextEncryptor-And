@@ -12,4 +12,9 @@
     <string name="label_for_copy_button">प्रतिलिपि</string>
     <string name="label_for_paste_button">पेस्ट</string>
     <string name="label_for_save_pass_switch">पासवर्ड याद रखें</string>
+    <string name="drive_not_available">\"गूगल ड्राइव\" उपलब्ध नहीं है</string>
+    <string name="unable_to_connect">\"गूगल ड्राइव\" से कनेक्ट करने में असमर्थ</string>
+    <string name="label_for_drive">गूगल ड्राइव</string>
+    <string name="label_for_save">Google ड्राइव पर लिखो</string>
+    <string name="label_for_load">Google ड्राइव से पढ़ें</string>
 </resources>

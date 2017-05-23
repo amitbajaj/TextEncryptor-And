@@ -36,12 +36,6 @@ public class AESCrypto {
             sb.append(DIGITS[(singleByte >>> 4) & 0x0F]);
             sb.append(DIGITS[singleByte & 0x0F]);
         }
-        /*
-        for (int i = 0; i < data.length; i++) {
-            sb.append(DIGITS[(data[i] >>> 4) & 0x0F]);
-            sb.append(DIGITS[data[i] & 0x0F]);
-        }
-        */
         return sb.toString();
     }
 

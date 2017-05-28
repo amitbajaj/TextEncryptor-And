@@ -9,12 +9,7 @@
     <string name="decryption_error">وجه الفتاة! حدث خطأ ما مع فك التشفير</string>
     <string name="error_label">خطأ!</string>
     <string name="ok_button">حسنا!</string>
-    <string name="label_for_copy_button">نسخ</string>
-    <string name="label_for_paste_button">معجون</string>
     <string name="label_for_save_pass_switch">تذكر كلمة المرور</string>
-    <string name="drive_not_available">غوغل دريف غير متوفر!</string>
-    <string name="unable_to_connect">غير قادر على الاتصال \"محرك جوجل\"</string>
-    <string name="label_for_drive">غوغل دريف</string>
     <string name="label_for_save">الكتابة إلى محرك جوجل</string>
     <string name="label_for_load">قراءة من محرك جوجل</string>
 </resources>

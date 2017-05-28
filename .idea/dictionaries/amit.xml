@@ -3,6 +3,11 @@
     <words>
       <w>buzzzz</w>
       <w>encryptor</w>
+      <w>ivlength</w>
+      <w>keylength</w>
+      <w>pkcs</w>
+      <w>sharedpref</w>
+      <w>skey</w>
       <w>textencryptor</w>
     </words>
   </dictionary>

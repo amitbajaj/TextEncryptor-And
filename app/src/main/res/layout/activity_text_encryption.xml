@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="online.buzzzz.security.textencryptor.TextEncryption">
+
+    <LinearLayout
+        android:id="@+id/masterLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <TextView
+            android:labelFor="@+id/txtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_for_password" />
+
+        <EditText
+            android:id="@+id/txtPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            />
+
+        <Switch
+            android:id="@+id/savePass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/label_for_save_pass_switch"
+            android:onClick="setPassSave"
+            tools:layout_editor_absoluteX="193dp"
+            tools:layout_editor_absoluteY="144dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            style="?android:attr/buttonBarStyle">
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="99dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:onClick="doEncrypt"
+                android:text="@string/label_for_encrypt_button"
+                app:layout_constraintBottom_toBottomOf="@+id/btnDecrypt"
+                tools:layout_editor_absoluteX="156dp" />
+
+            <Button
+                android:id="@+id/btnDecrypt"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="99dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:onClick="doDecrypt"
+                android:text="@string/label_for_decrypt_button"
+                tools:layout_editor_absoluteX="269dp"
+                tools:layout_editor_absoluteY="457dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp"
+            style="?android:attr/buttonBarStyle">
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="99dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:onClick="loadFromDrive"
+                android:text="@string/label_for_load"
+                tools:layout_editor_absoluteX="269dp"
+                tools:layout_editor_absoluteY="457dp" />
+
+            <Button
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="99dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:onClick="saveToDrive"
+                android:text="@string/label_for_save"
+                tools:layout_editor_absoluteX="269dp"
+                tools:layout_editor_absoluteY="457dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:labelFor="@+id/txtData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_for_data" />
+
+        <EditText
+            android:id="@+id/txtData"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="start"
+            android:inputType="textMultiLine"
+            android:scrollHorizontally="false"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="vertical"
+            android:selectAllOnFocus="true"
+            android:textAlignment="viewStart" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">TextEncryptor</string>
+    <string name="label_for_password">Password for Encryption</string>
+    <string name="label_for_data">Source/Encrypted Data</string>
+    <string name="label_for_encrypt_button">Encrypt</string>
+    <string name="label_for_decrypt_button">Decrypt</string>
+    <string name="encryption_error">Oops! Something went wrong with Encryption</string>
+    <string name="decryption_error">Oops! Something went wrong with Decryption</string>
+    <string name="error_label">Error!</string>
+    <string name="ok_button">OK!</string>
+    <string name="label_for_save_pass_switch">Save Password</string>
+    <string name="label_for_save">Save @ Google Drive</string>
+    <string name="label_for_load">Load @ Google Drive</string>
+</resources>

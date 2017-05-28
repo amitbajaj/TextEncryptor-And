@@ -1,14 +1,8 @@
 package online.buzzzz.security.textencryptor;
 
 import android.app.AlertDialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,25 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.drive.Drive;
-import com.google.android.gms.drive.DriveApi;
-import com.google.android.gms.drive.DriveFile;
-import com.google.android.gms.drive.DriveId;
-import com.google.android.gms.drive.DriveResource;
-import com.google.android.gms.drive.MetadataChangeSet;
-import com.google.android.gms.drive.events.ChangeListener;
-
-import java.util.Set;
-
 import online.buzzzz.security.AESCrypto;
-import online.buzzzz.security.AndroidHelper;
 import online.buzzzz.security.GoogleDriveHelper;
 import online.buzzzz.security.GoogleDriveHelperListener;
 
+@SuppressWarnings("ALL")
 public class TextEncryption extends AppCompatActivity implements GoogleDriveHelperListener{
 
     private String encrypt_err_msg;
@@ -47,7 +27,6 @@ public class TextEncryption extends AppCompatActivity implements GoogleDriveHelp
     private String error_title;
     private String ok_button;
     private final String PREFS_NAME = "TextEncryptor";
-    private AndroidHelper ah;
     private GoogleDriveHelper gh;
     private int googleDriveMode = 0;
     @Override
@@ -98,18 +77,9 @@ public class TextEncryption extends AppCompatActivity implements GoogleDriveHelp
         error_title = getString(R.string.error_label);
         ok_button = getString(R.string.ok_button);
 
-
-        /*
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Drive.API)
-                .addScope(Drive.SCOPE_FILE)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
-        */
     }
 
-    public void showMessage(String sMessage){
+    private void showMessage(String sMessage){
         new AlertDialog.Builder(TextEncryption.this)
                 .setTitle(error_title)
                 .setMessage(sMessage)
@@ -143,26 +113,6 @@ public class TextEncryption extends AppCompatActivity implements GoogleDriveHelp
 
     public void doDecrypt(View v){
         doWork(2);
-    }
-
-    public void doCopy(View v) { doCopyPaste(1); }
-
-    public void doPaste(View v){ doCopyPaste(2); }
-
-    public void doCopyPaste(int iMode){
-        EditText sourceData = (EditText)findViewById(R.id.txtData);
-        ClipboardManager clipboard = (ClipboardManager)
-                getSystemService(Context.CLIPBOARD_SERVICE);
-
-        sourceData.selectAll();
-        if (iMode == 1){
-            ClipData clip = ClipData.newPlainText("Data",sourceData.getText());
-            clipboard.setPrimaryClip(clip);
-        }else{
-            ClipData.Item item = clipboard.getPrimaryClip().getItemAt(0);
-            sourceData.setText(item.getText());
-        }
-
     }
 
     private void doWork(int iMode){
@@ -229,12 +179,11 @@ public class TextEncryption extends AppCompatActivity implements GoogleDriveHelp
         }
     }
 
-    protected void readFile(){
-        EditText sourceData = (EditText)findViewById(R.id.txtData);
+    private void readFile(){
         gh.readFile("TextEncryptor");
     }
 
-    protected void writeFile(){
+    private void writeFile(){
         EditText sourceData = (EditText)findViewById(R.id.txtData);
         gh.writeFile("TextEncryptor",sourceData.getText().toString());
     }
@@ -282,7 +231,7 @@ public class TextEncryption extends AppCompatActivity implements GoogleDriveHelp
 
     @Override
     public void onFileOpenFailure() {
-        Toast.makeText(getApplicationContext(),"Unable to create file!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Unable to open file!",Toast.LENGTH_SHORT).show();
         gh.disconnect();
         setWindowState(true);
     }
@@ -309,98 +258,4 @@ public class TextEncryption extends AppCompatActivity implements GoogleDriveHelp
     }
 
 
-    /*
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        isClientConnected = true;
-
-        DriveFile file = new DriveFile() {
-            @Override
-            public PendingResult<DriveApi.DriveContentsResult> open(GoogleApiClient googleApiClient, int i, DownloadProgressListener downloadProgressListener) {
-                return null;
-            }
-
-            @Override
-            public PendingResult<MetadataResult> getMetadata(GoogleApiClient googleApiClient) {
-                return null;
-            }
-
-            @Override
-            public PendingResult<MetadataResult> updateMetadata(GoogleApiClient googleApiClient, MetadataChangeSet metadataChangeSet) {
-                return null;
-            }
-
-            @Override
-            public DriveId getDriveId() {
-                return null;
-            }
-
-            @Override
-            public PendingResult<DriveApi.MetadataBufferResult> listParents(GoogleApiClient googleApiClient) {
-                return null;
-            }
-
-            @Override
-            public PendingResult<Status> delete(GoogleApiClient googleApiClient) {
-                return null;
-            }
-
-            @Override
-            public PendingResult<Status> setParents(GoogleApiClient googleApiClient, Set<DriveId> set) {
-                return null;
-            }
-
-            @Override
-            public PendingResult<Status> addChangeListener(GoogleApiClient googleApiClient, ChangeListener changeListener) {
-                return null;
-            }
-
-            @Override
-            public PendingResult<Status> removeChangeListener(GoogleApiClient googleApiClient, ChangeListener changeListener) {
-                return null;
-            }
-
-            @Override
-            public PendingResult<Status> addChangeSubscription(GoogleApiClient googleApiClient) {
-                return null;
-            }
-
-            @Override
-            public PendingResult<Status> removeChangeSubscription(GoogleApiClient googleApiClient) {
-                return null;
-            }
-
-            @Override
-            public PendingResult<Status> trash(GoogleApiClient googleApiClient) {
-                return null;
-            }
-
-            @Override
-            public PendingResult<Status> untrash(GoogleApiClient googleApiClient) {
-                return null;
-            }
-        };
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-        if (connectionResult.hasResolution()){
-            try{
-                connectionResult.startResolutionForResult(this,1);
-            }catch (IntentSender.SendIntentException e){
-                showMessage(e.getMessage());
-            }
-
-        }else{
-            showMessage(getString(R.string.unable_to_connect));
-        }
-
-        showMessage(getString(R.string.drive_not_available));
-    }
-    */
 }

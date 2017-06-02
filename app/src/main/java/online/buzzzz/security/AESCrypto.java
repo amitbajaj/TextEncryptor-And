@@ -83,8 +83,7 @@ public class AESCrypto {
             cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
 
             byte[] original = cipher.doFinal(encrypted);
-
-            return new String(original);
+            return (new String(original)).replace("\r\n","\r").replace("\r","\r\n");
         } catch (UnsupportedEncodingException | InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | BadPaddingException | IllegalBlockSizeException | NoSuchPaddingException ex) {
             throw new AESCryptoException("Error decrypting text!!");
         }
